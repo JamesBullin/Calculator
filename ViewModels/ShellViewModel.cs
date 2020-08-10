@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OperationsLibrary;
 
 namespace Calculator.ViewModels
 {
@@ -31,44 +32,61 @@ namespace Calculator.ViewModels
             }
         }
 
-        public string _lastOperation = string.Empty;
+        public string _operation = string.Empty;
 
         public void DoCalculation()
         {
             decimal x = decimal.Parse(Display);
             decimal y = 0;
 
-            if (Input != string.Empty)
+            if (Input == string.Empty)
             {
-                y = decimal.Parse(Input);
+                return;
             }
+
+            y = decimal.Parse(Input);
 
             decimal output = 0;
 
-            switch (_lastOperation)
+            switch (_operation)
             {
                 case "":
                     output = (y == 0) ? x : y ;
                     break;
 
                 case "Addition":
-                    output = x + y;
+                    output = OperationsLibrary.Operations.Addition(x, y);
                     break;
 
                 case "Subtraction":
-                    output = x - y;
+                    output = OperationsLibrary.Operations.Subtraction(x, y);
                     break;
 
                 case "Multiplication":
-                    output = x * y;
+                    output = OperationsLibrary.Operations.Multiplication(x, y);
                     break;
 
                 case "Division":
-                    output = x / y;
+                    output = OperationsLibrary.Operations.Division(x, y);
+                    break;
+
+                case "Power":
+                    output = OperationsLibrary.Operations.Power(x, y);
+                    break;
+
+                case "Reciprocal":
+                    output = OperationsLibrary.Operations.Division(1, y);
+                    break;
+
+                case "SquareRoot":
+                    output = OperationsLibrary.Operations.Power(y, (decimal)0.5);
+                    break;
+
+                case "Modulus":
+                    output = OperationsLibrary.Operations.Modulus(x, y);
                     break;
 
                 default:
-                    Display = Input;
                     break;
             }
 
@@ -79,88 +97,83 @@ namespace Calculator.ViewModels
 
         #region ActionButtons
 
+        public void OperationInput(string operation)
+        {
+            DoCalculation();
+            _operation = operation;
+        }
+
+        public void InstantOperation(string operation)
+        {
+            _operation = operation;
+
+            // If the input is empty, treat the current display as the input
+            if (Input == string.Empty)
+            {
+                Input = Display;
+            }
+
+            DoCalculation();
+            _operation = "";
+        }
+
+        /*
         public void BtnEquals()
         {
             DoCalculation();
-            _lastOperation = "";
+            _operation = "";
         }
 
         public void BtnAdd()
         {
             DoCalculation();
-            _lastOperation = "Addition";
+            _operation = "Addition";
         }
 
         public void BtnSubtract()
         {
             DoCalculation();
-            _lastOperation = "Subtraction";
+            _operation = "Subtraction";
         }
 
         public void BtnMultiply()
         {
             DoCalculation();
-            _lastOperation = "Multiplication";
+            _operation = "Multiplication";
         }
 
         public void BtnDivide()
         {
             DoCalculation();
-            _lastOperation = "Division";
+            _operation = "Division";
         }
 
+        public void BtnModulus()
+        {
+            DoCalculation();
+            _operation = "Modulus";
+        }
+        */
         #endregion
 
         #region InputButtons
 
-        public void Btn0()
+        public void NumberInput(string x)
         {
-            Input += "0";
-        }
-        public void Btn1()
-        {
-            Input += "1";
-        }
-        public void Btn2()
-        {
-            Input += "2";
-        }
-        public void Btn3()
-        {
-            Input += "3";
-        }
-        public void Btn4()
-        {
-            Input += "4";
-        }
-        public void Btn5()
-        {
-            Input += "5";
-        }
-        public void Btn6()
-        {
-            Input += "6";
-        }
-        public void Btn7()
-        {
-            Input += "7";
-        }
-        public void Btn8()
-        {
-            Input += "8";
-        }
-        public void Btn9()
-        {
-            Input += "9";
+            Input += x;
         }
 
         public void BtnNegative()
         {
-            Input = (Input != string.Empty && Input.Substring(0, 1) == "-") ? Input.TrimStart('-') : Input = "-" + Input;
+            Input = (Input != string.Empty && Input.Substring(0, 1) == "-") 
+                ? Input.TrimStart('-') 
+                : Input = "-" + Input;
         }
         public void BtnPoint()
         {
-            Input += (Input == string.Empty || Input == "-") ? "0." : ".";
+            Input += (Input == string.Empty || Input == "-") 
+                ? "0." 
+                : ".";
         }
 
         #endregion
@@ -169,12 +182,13 @@ namespace Calculator.ViewModels
         public void BtnClearHistory()
         {
             BtnClear();
+            Display = "0";
+            _operation = string.Empty;
         }
         public void BtnClear()
         {
             Input = string.Empty;
-            Display = "0";
-            _lastOperation = string.Empty;
+
         }
         public void BtnDelete()
         {

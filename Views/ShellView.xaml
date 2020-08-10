@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator.Views"
+        xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
+        
         Title="ShellView" Height="450" Width="400"
         Background="DarkGray" FontSize="20"> 
     <Window.Resources>
@@ -57,35 +59,35 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="BtnPercentage" Grid.Column="0" Grid.Row="0" Content="%"/>
+            <Button x:Name="BtnModulus" cal:Message.Attach="[Event Click] = [Action OperationInput('Modulus')]" Grid.Column="0" Grid.Row="0" Content="%"/>
             <Button x:Name="BtnClearHistory" Grid.Column="1" Grid.Row="0" Content="CE"/>
             <Button x:Name="BtnClear" Grid.Column="2" Grid.Row="0" Content="C"/>
             <Button x:Name="BtnDelete" Grid.Column="3" Grid.Row="0" Content="&#9003;"/>
-            
-            <Button x:Name="BtnReciprocal" Grid.Column="0" Grid.Row="1" Content="1/x"/>
-            <Button x:Name="BtnPower" Grid.Column="1" Grid.Row="1" Content="x^y"/>
-            <Button x:Name="BtnRoot" Grid.Column="2" Grid.Row="1" Content="&#8730;"/>
-            <Button x:Name="BtnDivide" Grid.Column="3" Grid.Row="1" Content="&#247;"/>
 
-            <Button x:Name="Btn7" Grid.Column="0" Grid.Row="2" Style="{StaticResource NumberButton}" Content="7"/>
-            <Button x:Name="Btn8" Grid.Column="1" Grid.Row="2" Style="{StaticResource NumberButton}" Content="8"/>
-            <Button x:Name="Btn9" Grid.Column="2" Grid.Row="2" Style="{StaticResource NumberButton}" Content="9"/>
-            <Button x:Name="BtnMultiply" Grid.Column="3" Grid.Row="2" Content="&#215;"/>
+            <Button x:Name="BtnReciprocal" cal:Message.Attach="[Event Click] = [Action InstantOperation('Reciprocal')]" Grid.Column="0" Grid.Row="1" Content="1/x"/>
+            <Button x:Name="BtnPower" cal:Message.Attach="[Event Click] = [Action OperationInput('Power')]" Grid.Column="1" Grid.Row="1" Content="x^y"/>
+            <Button x:Name="BtnRoot" cal:Message.Attach="[Event Click] = [Action InstantOperation('SquareRoot')]" Grid.Column="2" Grid.Row="1" Content="&#8730;"/>
+            <Button x:Name="BtnDivide" cal:Message.Attach="[Event Click] = [Action OperationInput('Division')]" Grid.Column="3" Grid.Row="1" Content="&#247;"/>
 
-            <Button x:Name="Btn4" Grid.Column="0" Grid.Row="3" Style="{StaticResource NumberButton}" Content="4"/>
-            <Button x:Name="Btn5" Grid.Column="1" Grid.Row="3" Style="{StaticResource NumberButton}" Content="5"/>
-            <Button x:Name="Btn6" Grid.Column="2" Grid.Row="3" Style="{StaticResource NumberButton}" Content="6"/>
-            <Button x:Name="BtnSubtract" Grid.Column="3" Grid.Row="3" Content="&#8722;"/>
+            <Button x:Name="Btn7" cal:Message.Attach="[Event Click] = [Action NumberInput('7')]" Grid.Column="0" Grid.Row="2" Style="{StaticResource NumberButton}" Content="7"/>
+            <Button x:Name="Btn8" cal:Message.Attach="[Event Click] = [Action NumberInput('8')]" Grid.Column="1" Grid.Row="2" Style="{StaticResource NumberButton}" Content="8"/>
+            <Button x:Name="Btn9" cal:Message.Attach="[Event Click] = [Action NumberInput('9')]" Grid.Column="2" Grid.Row="2" Style="{StaticResource NumberButton}" Content="9"/>
+            <Button x:Name="BtnMultiply" cal:Message.Attach="[Event Click] = [Action OperationInput('Multiplication')]" Grid.Column="3" Grid.Row="2" Content="&#215;"/>
 
-            <Button x:Name="Btn1" Command="{Binding NumberInput}" Tag="1" Grid.Column="0" Grid.Row="4" Style="{StaticResource NumberButton}" CommandParameter="1" Content="1"/>
-            <Button x:Name="Btn2" Grid.Column="1" Grid.Row="4" Style="{StaticResource NumberButton}" Content="2"/>
-            <Button x:Name="Btn3" Grid.Column="2" Grid.Row="4" Style="{StaticResource NumberButton}" Content="3"/>
-            <Button x:Name="BtnAdd" Grid.Column="3" Grid.Row="4" Content="&#43;"/>
+            <Button x:Name="Btn4" cal:Message.Attach="[Event Click] = [Action NumberInput('4')]" Grid.Column="0" Grid.Row="3" Style="{StaticResource NumberButton}" Content="4"/>
+            <Button x:Name="Btn5" cal:Message.Attach="[Event Click] = [Action NumberInput('5')]" Grid.Column="1" Grid.Row="3" Style="{StaticResource NumberButton}" Content="5"/>
+            <Button x:Name="Btn6" cal:Message.Attach="[Event Click] = [Action NumberInput('6')]" Grid.Column="2" Grid.Row="3" Style="{StaticResource NumberButton}" Content="6"/>
+            <Button x:Name="BtnSubtract" cal:Message.Attach="[Event Click] = [Action OperationInput('Subtraction')]" Grid.Column="3" Grid.Row="3" Content="&#8722;"/>
+
+            <Button x:Name="Btn1" cal:Message.Attach="[Event Click] = [Action NumberInput('1')]" Grid.Column="0" Grid.Row="4" Style="{StaticResource NumberButton}" Content="1"/>
+            <Button x:Name="Btn2" cal:Message.Attach="[Event Click] = [Action NumberInput('2')]" Grid.Column="1" Grid.Row="4" Style="{StaticResource NumberButton}" Content="2"/>
+            <Button x:Name="Btn3" cal:Message.Attach="[Event Click] = [Action NumberInput('3')]" Grid.Column="2" Grid.Row="4" Style="{StaticResource NumberButton}" Content="3"/>
+            <Button x:Name="BtnAdd" cal:Message.Attach="[Event Click] = [Action OperationInput('Addition')]" Grid.Column="3" Grid.Row="4" Content="&#43;"/>
 
             <Button x:Name="BtnNegative" Grid.Column="0" Grid.Row="5" Content="&#177;"/>
-            <Button x:Name="Btn0" Grid.Column="1" Grid.Row="5" Style="{StaticResource NumberButton}" Content="0"/>
+            <Button x:Name="Btn0" cal:Message.Attach="[Event Click] = [Action NumberInput('0')]" Grid.Column="1" Grid.Row="5" Style="{StaticResource NumberButton}" Content="0"/>
             <Button x:Name="BtnPoint" Grid.Column="2" Grid.Row="5" Content="&#8226;"/>
-            <Button x:Name="BtnEquals" Grid.Column="3" Grid.Row="5" Background="LightBlue" Content="&#61;"/>
+            <Button x:Name="BtnEquals" cal:Message.Attach="[Event Click] = [Action OperationInput('')]" Grid.Column="3" Grid.Row="5" Background="LightBlue" Content="&#61;"/>
         </Grid>
         
     </Grid>

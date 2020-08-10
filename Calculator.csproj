@@ -105,7 +105,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\OperationsLibrary\OperationsLibrary.csproj">
+      <Project>{7fb66be3-0434-414a-acb1-06a6a623734b}</Project>
+      <Name>OperationsLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>
