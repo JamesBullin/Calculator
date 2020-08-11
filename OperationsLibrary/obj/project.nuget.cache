@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "YCI0KKN2YQq0ZGB1tulQa6sTKAxDGT47v+g1PvI+3PtRoS5iRt2UXLpTQpPZXsIGD3XS0SOYmh4HCpPOKOFXuQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\James Bullin\\OneDrive\\SDET\\Calculator\\OperationsLibrary\\OperationsLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
