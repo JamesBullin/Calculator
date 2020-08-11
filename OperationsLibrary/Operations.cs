@@ -21,7 +21,12 @@ namespace OperationsLibrary
 
         public static decimal Division(decimal x, decimal y)
         {
+            //if (y == 0)
+            //{
+                
+            //}
             return x / y;
+            
         }
 
         public static decimal Modulus(decimal x, decimal y)

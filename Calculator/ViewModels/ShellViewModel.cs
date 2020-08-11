@@ -36,7 +36,13 @@ namespace Calculator.ViewModels
 
         public void DoCalculation()
         {
-            decimal x = decimal.Parse(Display);
+            decimal x = 0;
+            try
+            {
+                x = decimal.Parse(Display);
+            }
+            catch (FormatException) { }
+
             decimal y = 0;
 
             if (Input == string.Empty)
@@ -67,6 +73,12 @@ namespace Calculator.ViewModels
                     break;
 
                 case "Division":
+                    if (y == 0)
+                    {
+                        Display = "Math Error";
+                        Input = string.Empty;
+                        return;
+                    }
                     output = OperationsLibrary.Operations.Division(x, y);
                     break;
 
